@@ -39,8 +39,8 @@
                 if (!empty($_POST))     // hoặc if($_SERVER['REQUEST_METHOD'] == 'POST')
                 {
                     require_once 'connect.php';
-                    $account = $_POST['account'];
-                    $password = $_POST['password'];
+                    $account = mysqli_real_escape_string($conn,$_POST['account']);
+                    $password = mysqli_real_escape_string($conn,$_POST['password']);
                     $user_select_query = "select * from user where UserAccount = '$account' and UserPassword = '$password'";
                     $num = mysqli_num_rows(mysqli_query($conn, $user_select_query));
                     if ($num === 1)
@@ -86,7 +86,7 @@
             <div id="user-section">
                 <div id="user-account" class="nav-bar-button">
                     <img id="user-image" src="UserImages/<?php echo $user['UserImage']; ?>" alt="">
-                    <span><?php echo $user['UserAccount']; ?></span>
+                    <span class="text-nowrap"><?php echo $user['UserAccount']; ?></span>
                     <ul id="user-option">
                         <li>
                             <a href="add-comic.php">Thêm truyện mới</a>
@@ -104,4 +104,5 @@
         }
      ?>
     </div>
+<script type="text/javascript" src="Js/login-modal.js"></script>
 <script type="text/javascript" src="Js/ajax-request.js"></script>

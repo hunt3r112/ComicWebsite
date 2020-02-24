@@ -57,7 +57,7 @@
                                 {
                                     ?>
                                         <li class="new-chapter line-center">
-                                            <a href="chapter.php?ComicID=<?php echo $chapter['ComicID']; ?>&ChapterID=<?php echo $chapter['ChapterID']; ?>">
+                                            <a class="text-nowrap" href="chapter.php?ComicID=<?php echo $chapter['ComicID']; ?>&ChapterID=<?php echo $chapter['ChapterID']; ?>">
                                                 <?php echo $chapter['ChapterName']; ?></a>
                                         </li>
                                     <?php
@@ -90,7 +90,4 @@
 
     <div id="footer"></div>
 </body>
-<script type="text/javascript" src="Js/slide.js"></script>
-<script type="text/javascript" src="Js/login-modal.js"></script>
-<script type="text/javascript" src="Js/pagination.js"></script>
 </html>

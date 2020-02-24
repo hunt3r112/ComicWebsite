@@ -2,6 +2,8 @@
     <div class="section-header">
         <h2 class="section-name recommend-section">Truyện đề cử</h2>
     </div>
+    <div class="slide-buttons" id="prev-button"><</div>
+    <div class="slide-buttons" id="next-button">></div>
     <div id="slide-wrapper">
         <?php
         require_once 'connect.php';
@@ -41,3 +43,4 @@
         ?>
     </div>
 </div>
+<script type="text/javascript" src="Js/slide.js"></script>
