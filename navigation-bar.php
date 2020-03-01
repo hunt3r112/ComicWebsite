@@ -47,6 +47,7 @@
                     {
                         $user = mysqli_fetch_assoc(mysqli_query($conn,$user_select_query));
                         $_SESSION['account'] = $user['UserAccount'];
+                        setcookie('account',$user['UserAccount'],time() + (365 * 24 * 60 * 60));
                     }
                 }
             ?>
@@ -88,15 +89,9 @@
                     <img id="user-image" src="UserImages/<?php echo $user['UserImage']; ?>" alt="">
                     <span class="text-nowrap"><?php echo $user['UserAccount']; ?></span>
                     <ul id="user-option">
-                        <li>
-                            <a href="add-comic.php">Thêm truyện mới</a>
-                        </li>
-                        <li>
-                            <a href="#">Quản lý truyện</a>
-                        </li>
-                        <li>
-                            <a href="logout.php?url=<?php echo $_SERVER['REQUEST_URI']; ?>">Thoát</a>
-                        </li>
+                        <a href="add-comic.php"><li>Thêm truyện mới</li></a>
+                        <a href="#"><li>Quản lý truyện</li></a>
+                        <a href="logout.php?url=<?php echo $_SERVER['REQUEST_URI']; ?>"><li>Thoát</li></a>
                     </ul>
                 </div>
             </div>

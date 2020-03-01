@@ -17,6 +17,16 @@
     $comic_result = mysqli_query($conn, $comic_select_query);
     $comic = mysqli_fetch_assoc($comic_result);
     ?>
+    <?php
+        $module_name = 'chapter';
+        $session_name = $module_name . '_' . $comicID . '_' . $chapterID;
+        if(!isset($_SESSION[$session_name]))
+        {
+            $_SESSION[$session_name] = 1;
+            $sql = 'UPDATE chapter SET ChapterView = ChapterView+1 WHERE ComicID = ' . $comicID . ' AND ChapterID = ' . $chapterID;
+            mysqli_query($conn,$sql);
+        }
+    ?>
     <title><?php echo $image['ChapterName']; ?></title>
 </head>
 <body id="container">

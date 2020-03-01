@@ -7,7 +7,12 @@
  */
     session_start();
     require_once 'connect.php';
-    if (isset($_SESSION['account']))
+    $_SESSION['id'] = session_id();
+    if(isset($_COOKIE['account']))
+    {
+        $_SESSION['account'] = $_COOKIE['account'];
+    }
+    if(isset($_SESSION['account']))
     {
         $account = $_SESSION['account'];
         $user_select_query = "select * from user where UserAccount = '$account'";

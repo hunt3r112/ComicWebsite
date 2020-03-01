@@ -9,9 +9,19 @@ include 'check-account-session.php';
     <?php
         require_once 'connect.php';
         $comicID = $_GET['ComicID'];
-        $comic_select_query = "select * from comic where ComicID = '$comicID'";
+        $comic_select_query = "select * from comic where ComicID = $comicID";
         $comic_result = mysqli_query($conn, $comic_select_query);
         $comic = mysqli_fetch_assoc($comic_result);
+    ?>
+    <?php
+        $module_name = 'comic';
+        $session_name = $module_name . '_' . $comicID;
+        if(!isset($_SESSION[$session_name]))
+        {
+            $_SESSION[$session_name] = 1;
+            $sql = 'UPDATE comic SET View = View+1 WHERE ComicID=' . $comicID;
+            mysqli_query($conn,$sql);
+        }
     ?>
     <title>Đọc truyện <?php echo $comic['Name']; ?></title>
 </head>

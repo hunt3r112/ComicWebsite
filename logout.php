@@ -6,7 +6,8 @@
  * Time: 10:52 PM
  */
     session_start();
-    session_destroy ();
+    setcookie('account','',time() + (365 * 24 * 60 * 60));
+    unset($_SESSION['account']);
     $url = $_GET['url'];
     header("Location: $url");
 ?>
