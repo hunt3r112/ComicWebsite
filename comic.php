@@ -12,6 +12,10 @@ include 'check-account-session.php';
         $comic_select_query = "select * from comic where ComicID = $comicID";
         $comic_result = mysqli_query($conn, $comic_select_query);
         $comic = mysqli_fetch_assoc($comic_result);
+
+        $author_select_query = "select * from author inner join comic on author.AuthorID = comic.AuthorID where comic.AuthorID = '".$comic['AuthorID']."'";
+        $author_result = mysqli_query($conn, $author_select_query);
+        $author = mysqli_fetch_assoc($author_result);
     ?>
     <?php
         $module_name = 'comic';
@@ -54,12 +58,9 @@ include 'check-account-session.php';
                         <li>
                             <h1><?php echo $comic['Name']; ?></h1>
                         </li>
-                        <li>Tác giả : <span class="tag-link"><a href="#">
+                        <li>Tác giả : <span class="tag-link"><a href="author.php?AuthorID=<?php echo $author['AuthorID'];?>">
                             <?php
-                            $author_select_query = "select author.AuthorName from author inner join comic on author.AuthorID = comic.AuthorID where comic.AuthorID = '".$comic['AuthorID']."'";
-                            $author_result = mysqli_query($conn, $author_select_query);
-                            $author = mysqli_fetch_assoc($author_result);
-                            echo $author['AuthorName'];
+                                echo $author['AuthorName'];
                             ?>
                         </a></span></li>
                         <li>Tình trạng : <?php echo $comic['Status']; ?></li>
@@ -68,10 +69,10 @@ include 'check-account-session.php';
                         <li>Lượt xem : <?php echo $comic['View']; ?></li>
                         <li>Thể loại :
                             <?php
-                            $genre_select_query = "select genre.GenreName from genre inner join comic_genre on genre.GenreID = comic_genre.GenreID where ComicID = '".$comic['ComicID']."' order by genre.GenreName asc";
+                            $genre_select_query = "select * from genre inner join comic_genre on genre.GenreID = comic_genre.GenreID where ComicID = '".$comic['ComicID']."' order by genre.GenreName asc";
                             $genre_result = mysqli_query($conn, $genre_select_query);
                             while ($genre = mysqli_fetch_assoc($genre_result))
-                                echo '<span class="tag-link"><a href="#">'.$genre['GenreName'].'</a></span>';
+                                echo '<span class="tag-link"><a href="genre.php?GenreID='.$genre['GenreID'].'">'.$genre['GenreName'].'</a></span>';
                             ?>
                         </li>
                     </ul>
